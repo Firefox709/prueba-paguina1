@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Naturaleza Viva — Portal de Ecosistemas</title>
+  <meta name="description" content="Portal completo sobre naturaleza: biomas, especies, conservación, galería y recursos." />
+
+  <!-- Favicons -->
+  <link rel="icon" href="https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=48&auto=format&fit=crop&crop=faces" />
+
+  <style>
+    :root{
+      --accent:#2b9348;
+      --accent-2:#1b6b3a;
+      --muted:#6b7280;
+      --bg:#0f172a;
+      --card:#0b1220a8;
+      --glass: rgba(255,255,255,0.06);
+      --radius:14px;
+      --maxw:1200px;
+      --gap:18px;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,#071126 0%, #072733 60%, #0b2a1f 100%);color:#e6eef0}
+
+    /* Layout */
+    .container{max-width:var(--maxw);margin:0 auto;padding:28px}
+    header{backdrop-filter: blur(6px);background:linear-gradient(90deg, rgba(11,18,32,0.45), rgba(11,18,32,0.15));border-radius:12px;padding:14px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{width:54px;height:54px;border-radius:10px;object-fit:cover}
+    nav{margin-left:auto}
+    nav a{color:inherit;text-decoration:none;margin-left:14px;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:stretch;margin-bottom:24px}
+    .hero .info{padding:24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px}
+    h1{margin:0;font-size:32px}
+    p.lead{color:var(--muted);margin-top:8px}
+
+    /* cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--gap);margin-top:16px}
+    .card{background:var(--glass);padding:16px;border-radius:12px}
+    .card h3{margin:6px 0}
+
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:8px;cursor:pointer}
+
+    /* sections */
+    section{margin-bottom:24px}
+    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
+
+    footer{padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));display:flex;align-items:center;justify-content:space-between}
+    .social a{margin-left:8px;color:inherit;text-decoration:none}
+
+    /* responsive */
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}.container{padding:16px}}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,12,0.6);visibility:hidden;opacity:0;transition:opacity .18s}
+    .modal.open{visibility:visible;opacity:1}
+    .modal .dialog{background:#071229;padding:12px;border-radius:10px;max-width:90%;max-height:90%;overflow:auto}
+    .modal img{max-width:100%;height:auto;border-radius:6px}
+
+    /* small utilities */
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:#062017;text-decoration:none;font-weight:700}
+    a.alt{color:var(--accent-2)}
+    .muted{color:var(--muted)}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:600}
+
+    /* map embed responsive */
+    .mapwrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px}
+    .mapwrap iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
+
+    /* form */
+    form .row{display:flex;gap:8px}
+    input, textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=400&auto=format&fit=crop&crop=faces" alt="logo naturaleza" />
+        <div>
+          <strong>Naturaleza Viva</strong>
+          <div class="muted">Ecosistemas, especies y conservación</div>
+        </div>
+      </div>
+
+      <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#ecosistemas">Ecosistemas</a>
+        <a href="#fauna">Fauna</a>
+        <a href="#galeria">Galería</a>
+        <a href="#conservacion">Conservación</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero">
+        <div class="info">
+          <h1>Bienvenido a Naturaleza Viva</h1>
+          <p class="lead">Explora biomas del mundo, aprende sobre especies emblemáticas, descubre proyectos de conservación y navega por una galería interactiva.</p>
+          <div class="cards">
+            <article class="card">
+              <h3>Explorar biomas</h3>
+              <p class="muted">Tierra, océanos, montañas, desiertos, selvas y humedales — perfiles completos con clima, flora y fauna.</p>
+              <a class="btn" href="#ecosistemas">Ver biomas</a>
+            </article>
+            <article class="card">
+              <h3>Especies en foco</h3>
+              <p class="muted">Fichas de especies, estado de conservación y curiosidades.</p>
+              <a class="btn" href="#fauna">Ver especies</a>
+            </article>
+            <article class="card">
+              <h3>Proyectos</h3>
+              <p class="muted">Proyectos de conservación y cómo colaborar desde cualquier lugar.</p>
+              <a class="btn" href="#conservacion">Conservación</a>
+            </article>
+          </div>
+        </div>
+
+        <aside>
+          <div style="padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;">
+            <h3>Datos rápidos</h3>
+            <ul class="muted">
+              <li><span class="chip">7</span> biomas principales del planeta</li>
+              <li><span class="chip">>1.8M</span> especies descritas (aprox.)</li>
+              <li><span class="chip">Acción</span> — participa en proyectos locales</li>
+            </ul>
+            <p style="margin-top:10px"><a class="alt" href="https://www.nationalgeographic.com" target="_blank" rel="noopener">Más en National Geographic</a></p>
+            <p style="margin-top:8px"><a class="alt" href="https://www.worldwildlife.org" target="_blank" rel="noopener">World Wildlife Fund</a></p>
+          </div>
+
+          <div style="margin-top:12px;padding:12px;border-radius:12px;background:var(--glass);">
+            <h4>Mapa interactivo</h4>
+            <div class="mapwrap">
+              <!-- OpenStreetMap embed: usuario puede mover y ampliar -->
+              <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-60.0%2C-20.0%2C-55.0%2C-15.0&amp;layer=mapnik" aria-label="Mapa" title="Mapa" ></iframe>
+            </div>
+            <p class="muted" style="font-size:13px;margin-top:8px">Usa el mapa para localizar parques, reservas y puntos de interés.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section id="ecosistemas">
+        <h2>Ecosistemas y biomas</h2>
+        <p class="muted">Descripción breve de cada bioma, su clima, flora y fauna representativa.</p>
+
+        <div class="two-col" style="margin-top:12px">
+          <div>
+            <article class="card">
+              <h3>Selva tropical</h3>
+              <p class="muted">Alta biodiversidad, lluvias intensas, suelo frágil. Especies emblemáticas: jaguar, guacamayo, anaconda.</p>
+              <a href="#fauna" class="alt">Ver especies de la selva →</a>
+            </article>
+
+            <article class="card" style="margin-top:12px">
+              <h3>Praderas</h3>
+              <p class="muted">Pastizales dominados por gramíneas, hogar de grandes pastadores y depredadores adaptados.</p>
+            </article>
+
+            <article class="card" style="margin-top:12px">
+              <h3>Océanos</h3>
+              <p class="muted">Cubre la mayor parte del planeta: corrientes, arrecifes, mamíferos marinos y pesquerías.</p>
+            </article>
+
+            <details class="card" style="margin-top:12px">
+              <summary><strong>Más biomas</strong></summary>
+              <p class="muted">Montañas, tundra, desiertos fríos y cálidos, humedales y manglares — todos esenciales para la vida global.</p>
+            </details>
+          </div>
+
+          <aside>
+            <div class="card">
+              <h4>Recursos externos</h4>
+              <ul class="muted">
+                <li><a href="https://www.iucn.org" target="_blank" rel="noopener">IUCN — Unión Internacional para la Conservación de la Naturaleza</a></li>
+                <li><a href="https://www.unep.org" target="_blank" rel="noopener">UNEP — Programa de las Naciones Unidas para el Medio Ambiente</a></li>
+                <li><a href="https://www.conservation.org" target="_blank" rel="noopener">Conservation International</a></li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-top:12px">
+              <h4>Cómo ayudar</h4>
+              <ol class="muted">
+                <li>Apoyar proyectos locales y globales</li>
+                <li>Reducir consumo de plástico</li>
+                <li>Participar en censos y ciencia ciudadana</li>
+              </ol>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="fauna">
+        <h2>Especies destacadas</h2>
+        <p class="muted">Fichas rápidas con estado de conservación y curiosidades.</p>
+
+        <div class="cards" style="margin-top:12px">
+          <article class="card">
+            <h3>Jaguar (<em>Panthera onca</em>)</h3>
+            <p class="muted">Estado: <strong>Vulnerable</strong> — Gran felino de América. Caza sigilosa y imprescindible para el control de presas.</p>
+            <a href="https://es.wikipedia.org/wiki/Jaguar" target="_blank" rel="noopener">Ficha completa (Wikipedia)</a>
+          </article>
+
+          <article class="card">
+            <h3>Tortuga marina (<em>Caretta caretta</em>)</h3>
+            <p class="muted">Estado: <strong>Vulnerable</strong> — Viajes transoceánicos para anidar en playas específicas.</p>
+            <a href="https://es.wikipedia.org/wiki/Tortuga_boba" target="_blank" rel="noopener">Ficha completa</a>
+          </article>
+
+          <article class="card">
+            <h3>Águila harpía (<em>Harpia harpyja</em>)</h3>
+            <p class="muted">Estado: <strong>Vulnerable</strong> — La rapaz más poderosa de las selvas tropicales americanas.</p>
+            <a href="https://es.wikipedia.org/wiki/Harpia_harpyja" target="_blank" rel="noopener">Ficha completa</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="galeria">
+        <h2>Galería interactiva</h2>
+        <p class="muted">Haz clic en cualquier imagen para verla en tamaño completo.</p>
+
+        <div class="gallery" style="margin-top:12px">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop" alt="Bosque verde" data-full="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="Montañas" data-full="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?q=80&w=800&auto=format&fit=crop" alt="Océano" data-full="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?q=80&w=1600&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop" alt="Cascada" data-full="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop">
+        </div>
+      </section>
+
+      <section id="conservacion">
+        <h2>Conservación y proyectos</h2>
+        <p class="muted">Iniciativas actuales, estudios científicos y cómo puedes colaborar.</p>
+
+        <div class="cards" style="margin-top:12px">
+          <article class="card">
+            <h3>Restauración de hábitat</h3>
+            <p class="muted">Proyectos para reconectar fragmentos de bosque y restaurar corredores biológicos.</p>
+            <a href="https://www.conservation.org" target="_blank" rel="noopener">Proyectos recomendados</a>
+          </article>
+
+          <article class="card">
+            <h3>Ciencia ciudadana</h3>
+            <p class="muted">Cómo participar en censos, reportes y aplicaciones como iNaturalist.</p>
+            <a href="https://www.inaturalist.org" target="_blank" rel="noopener">iNaturalist</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="contacto">
+        <h2>Contacto y suscripción</h2>
+        <p class="muted">Escríbenos o suscríbete para recibir actualizaciones sobre proyectos y eventos.</p>
+
+        <div class="two-col" style="margin-top:12px">
+          <form class="card" onsubmit="event.preventDefault();alert('Formulario simulado — aquí podría integrarse un backend.');">
+            <label>Nombre</label>
+            <input required placeholder="Tu nombre" />
+            <label>Email</label>
+            <input type="email" required placeholder="correo@ejemplo.com" />
+            <label>Mensaje</label>
+            <textarea rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+            <div style="margin-top:8px"><button class="btn" type="submit">Enviar</button></div>
+          </form>
+
+          <aside>
+            <div class="card">
+              <h4>Redes sociales</h4>
+              <p class="muted">Comparte el sitio y síguenos para más contenido.</p>
+              <div class="social">
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <a href="#" aria-label="Twitter">Twitter</a>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:12px">
+              <h4>Newsletter</h4>
+              <p class="muted">Suscríbete para recibir novedades (simulado).</p>
+              <div style="margin-top:8px"><input placeholder="Tu email" /><button class="btn" style="margin-top:8px">Suscribirme</button></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <strong>Naturaleza Viva</strong> — Hecho con ❤️ • <small class="muted">Recursos: Unsplash, OpenStreetMap</small></div>
+      <div class="muted">Diseño responsive • Accesible</div>
+    </footer>
+  </div>
+
+  <!-- Modal para galería -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="dialog">
+      <button id="closeModal" style="float:right;background:none;border:none;color:#fff;font-weight:700;cursor:pointer">Cerrar ✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // Galería: abrir imagen en modal
+    document.querySelectorAll('.gallery img').forEach(img=>{
+      img.addEventListener('click', ()=>{
+        const src = img.dataset.full || img.src;
+        const alt = img.alt || 'Imagen de la galería';
+        const modal = document.getElementById('modal');
+        const content = document.getElementById('modalContent');
+        content.innerHTML = `<img src="${src}" alt="${alt}"><p class='muted' style='margin-top:8px'>${alt}</p>`;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      const modal = document.getElementById('modal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    });
+    document.getElementById('modal').addEventListener('click', (e)=>{ if(e.target.id==='modal'){ e.currentTarget.classList.remove('open'); e.currentTarget.setAttribute('aria-hidden','true') }});
+
+    // Añadir enlaces automáticos a secciones desde nav (smooth scroll)
+    document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{ e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'}); });
+    });
+
+    // Accesibilidad: focus trap básico cuando modal está abierto
+    document.addEventListener('keydown', (e)=>{
+      const modal = document.getElementById('modal');
+      if(e.key==='Escape' && modal.classList.contains('open')){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+    });
+  </script>
+</body>
+</html>
